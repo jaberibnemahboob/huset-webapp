@@ -1,6 +1,6 @@
 let favoriteCategories = new Array();
 favoriteCategories.push(3);
-favoriteCategories.push(4);
+favoriteCategories.push(5);
 let categories;
 let nCategories;
 
