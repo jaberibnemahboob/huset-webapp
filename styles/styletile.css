@@ -39,7 +39,7 @@ nav a:active, nav a:hover{font: var(--font_nava); color: (--highlight2);}
 img{width: 100%;}
 
 
-
+.price{color: var(--highlight2);}
 .invertColor{color: var(--txtInvertColor) !important;}
 .pageHeader{background: var(--highlight);}
 .pageFooter{border-top: 1px solid var(--txtColor);}
@@ -54,5 +54,5 @@ box-shadow: 3px 3px 50px 0px rgba(0,0,0,0.15); margin: 1em 0; padding: 0.5em;}
 
 
 /* change this to change social icon possible and hover color i.e. 'var(--txtColor)','var(--highlight)'*/
-.socialIcon{color: var(--highlight);}
+.socialIcon{color: var(--highlight); display: inline-block; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--txtColor); padding: 0.42em 0.42em; margin: 0em 0.1em; font-size: 1.3em; cursor: pointer;}
 .socialIcon:hover{color: var(--highlight2);}
