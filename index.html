@@ -10,6 +10,17 @@
         <link rel="stylesheet" href="styles/wireframe.css"/>
         <link rel="stylesheet" href="styles/style.css"/>
 
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="194x194" href="images/favicon-194x194.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+        <link rel="manifest" href="images/manifest.json">
+        <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="images/mstile-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
     </head>
     <body class="homePage">
 
@@ -36,8 +47,6 @@
                     <div class="favNav">
                         <nav>
                             <a class="invertColor bold" data-cat="favorite-categories" onclick="getEventsByDefault()">Favorite Events</a>
-                            <a data-cat="4" onclick="getEventsByCategory('3')">Music</a>
-                            <a data-cat="3" onclick="getEventsByCategory('5')">Speech</a>
                         </nav>
                     </div>
 
@@ -83,17 +92,27 @@
             <article class="eventListItem">
                 <div class="content">
                     <div class="eventHeader">
-                        <h5 class="center underline txtCapitalize dTitle">Event Title</h5>
+                        <h4 class="txtUppercase dTitle">Event Title</h4>
+                        <p class="dDateNLocation"><span class="dDate"></span> at <span class="dTime"></span> | <span class="dVenue"></span></p>
                     </div>
                     <div class="eventInfo">
-                        <p class="align-justify dDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                        <ul>
-                            <li class="dCategories">Music / Jazz Music</li>
-                            <li>Social Sharing: <span class="dSocialLink"></span></li>
-                            <li>Price: <span class="price"><span class="dPrice">112</span> DKK</span> / <a href="" class="btn btn-sm secondary dBookNow">Book Now</a><span class="price dPresale">Presale Unavailable</span></li>
-                            <li><hr/></li>
-                            <li class="center"><a class="btn btn-sm primary dDetails">Read More</a></li>
-                        </ul>
+                        <div class="eventImg"><img class="dImage" src="images/logo.png" alt="Event Cover Image"/></div>
+                        <div class="eventInfoDetails">
+                            <p class="align-justify dDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
+                            <p class="socialLinks"><span class="dSocialLink"></span></p>
+                        </div>
+                    </div>
+                    <div class="eventInfo">
+                        <div>
+                            <p class="dCategories">Category / Sub Category</p>
+                        </div>
+                        <div class="eventBooking">
+                            <p class="">Admission: <span class="dPrice"></span> kr</p>
+                            <p class=""><a href="" class="btn btn-sm secondary dBookNow">Book Now</a><span class="price dPresale">Presale Unavailable</span></p>
+                        </div>
+                    </div>
+                    <div class="readMoreOption">
+                        <p class="center"><a class="btn btn-sm primary dDetails">Read More</a></p>
                     </div>
                 </div>
             </article>
@@ -103,7 +122,7 @@
             <article class="eventDetailsItem">
                 <div class="content">
                     <div class="eventHeader">
-                        <h5 class="center underline txtCapitalize dTitle">Event Title</h5>
+                        <h5 class="txtUppercase dTitle">Event Title</h5>
                     </div>
                     <div class="eventInfo">
                         <p class="align-justify dDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
@@ -118,8 +137,8 @@
         </template>
 
         <script src="scripts/script.js"></script>
-        <script src="scripts/loader.js"></script>
         <script src="scripts/navigation.js"></script>
+        <script src="scripts/loader.js"></script>
 
         <script src="https://use.fontawesome.com/webfontloader/1.6.24/webfontloader.js"></script>
 
