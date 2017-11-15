@@ -31,7 +31,7 @@
                         <a onclick="openNav()"><span class="invertColor">&#9776;</span></a>
                     </div>
                     <div class="logo">
-                        <a href=""><img src="images/logo.png" alt="Logo"/></a>
+                        <a href="index.html"><img src="images/logo.png" alt="Logo"/></a>
                     </div>
                 </div>
             </div>
@@ -46,13 +46,19 @@
                 <div class="navBox">
                     <div class="favNav">
                         <nav>
-                            <a class="invertColor bold" data-cat="favorite-categories" onclick="getEventsByDefault()">Favorite Events</a>
+                            <a href="index.html#default" class="invertColor bold" data-cat="favorite-categories" onclick="loadThisPage()">Favorite Events</a>
                         </nav>
                     </div>
 
                     <div class="catNav">
                         <nav>
-                            <a class="invertColor bold" data-cat="all-categories" onclick="getEventsAll()">All Events</a>
+                            <a href="index.html#all" class="invertColor bold" data-cat="all-categories" onclick="loadThisPage()">All Events</a>
+                        </nav>
+                    </div>
+
+                    <div class="pagNav">
+                        <nav>
+                            <a href="about.html" class="invertColor bold" data-cat="page" onclick="loadThisPage()">About</a>
                         </nav>
                     </div>
                 </div>
@@ -85,7 +91,7 @@
         </footer>
 
         <template id="navLinkTemplate">
-            <a href="#" data-cat="category-slug" onclick="getEventsByCategory('category-slug')">Category Name</a>
+            <a href="#" data-cat="category-slug" onclick="loadThisPage()">Category Name</a>
         </template>
 
         <template id="eventItemTemplate">

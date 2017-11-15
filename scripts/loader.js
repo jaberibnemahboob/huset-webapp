@@ -3,6 +3,7 @@ favoriteCategories.push(3);
 favoriteCategories.push(5);
 let categories;
 let nCategories;
+let catIDs = new Array();
 
 
 
@@ -11,12 +12,45 @@ let catNav = document.querySelector(".catNav nav");
 let favNav = document.querySelector(".favNav nav");
 let navLinkTemplate = document.querySelector("#navLinkTemplate").content;
 //FOR EVENT LIST OF PAGE CONTENT
-let eventList = document.querySelector(".eventList");
-let eventItemTemplate = document.querySelector("#eventItemTemplate").content;
+let eventList;
+let eventItemTemplate;
 //FOR SINGLE EVENT DETAILS
-let eventDetails = document.querySelector(".eventDetails");
-let eventDetailsTemplate = document.querySelector("#eventDetailsTemplate").content;
+let eventDetails;
+let eventDetailsTemplate;
+//FOR SINGLE PAGE DETAILS
+let pageDetails;
+let pageDetailsTemplate;
 
+
+function loadThisPage(){
+    if(window.location.href.indexOf("/about.html") != -1){
+        //YOU ARE IN ABOUT PAGE, SO LOAD ABOUT PAGE
+        pageDetails = document.querySelector(".pageDetails");
+        pageDetailsTemplate = document.querySelector("#pageDetailsTemplate").content;
+
+
+        getAboutUsPage();
+    }else{
+        //YOU ARE IN INDEX PAGE, SO LOAD DEFAULT EVENTS
+        eventList = document.querySelector(".eventList");
+        eventItemTemplate = document.querySelector("#eventItemTemplate").content;
+
+        eventDetails = document.querySelector(".eventDetails");
+        eventDetailsTemplate = document.querySelector("#eventDetailsTemplate").content;
+
+
+        setTimeout(function(){
+            let uri = window.location.href.split("#");
+            if(uri.length>1){
+                if(catIDs.indexOf(parseInt(uri[1])) != -1){
+                    getEventsByCategory(uri[1]);
+                }else if(uri[1] == "all"){
+                    getEventsAll();
+                }else getEventsByDefault();
+            }else getEventsByDefault();
+        },1000);
+    }
+}
 
 
 function getCategories(){
@@ -51,6 +85,11 @@ function getEventsById(id){
     let eventUrl = "https://studkea.jprkopat.com/semester_2/theme0701/exercise/huset-kbh/wp-json/wp/v2/events/" + id + "?_embed";
     fetch(eventUrl).then(res=>res.json()).then(showEventDetails);
 }
+function getAboutUsPage(){
+    let pageID = 96;
+    let eventUrl = "https://studkea.jprkopat.com/semester_2/theme0701/exercise/huset-kbh/wp-json/wp/v2/pages/"+pageID+"?_embed";
+    fetch(eventUrl).then(res=>res.json()).then(showPageDetails);
+}
 
 
 
@@ -60,6 +99,7 @@ function showCategoires(cats){
     let nCats = {};
     nCats["root"] = [0];
     cats.forEach(function(cat){
+        catIDs.push(cat.id);
         if(cat.parent == 0){
             nCats.root.push(cat);
         }
@@ -82,20 +122,21 @@ function showCategoires(cats){
 
     //NOW SET closeOnSelectNavItem FUNCTION
     closeOnSelectNavItem();
-    //NOW LOAD DEFAULT EVENTS
-    getEventsByDefault();
+
+    //NOW LOAD PAGE & CONTENT
+    loadThisPage();
 }
 function showEachCategory(cat){
     if(!isNumeric(cat)){
         let clone = navLinkTemplate.cloneNode(true);
         clone.querySelector("a").setAttribute("data-cat",cat.id);
-        clone.querySelector("a").setAttribute("onclick","getEventsByCategory('"+cat.id+"')");
+        clone.querySelector("a").setAttribute("href","index.html#"+cat.id);
         clone.querySelector("a").textContent = cat.name;
         catNav.appendChild(clone);
         if(favoriteCategories.indexOf(cat.id) != -1){
             let clone2 = navLinkTemplate.cloneNode(true);
             clone2.querySelector("a").setAttribute("data-cat",cat.id);
-            clone2.querySelector("a").setAttribute("onclick","getEventsByCategory('"+cat.id+"')");
+            clone2.querySelector("a").setAttribute("href","index.html#"+cat.id);
             clone2.querySelector("a").textContent = cat.name;
             favNav.appendChild(clone2);
         }
@@ -118,7 +159,7 @@ function showEachEvent(event){
     clone.querySelector(".dDescription").innerHTML = event.content.rendered;
     let postCategories = new Array();
     categoires.forEach(function(cat){
-        console.log(event.categories.indexOf(cat.id));
+        //console.log(event.categories.indexOf(cat.id));
         if(cat.parent != nCategories.venues[0] && event.categories.indexOf(cat.id) !== -1){
             postCategories.push(cat.name);
         }
@@ -159,7 +200,7 @@ function showEventDetails(event){
     clone.querySelector(".dDescription").innerHTML = event.content.rendered;
     let postCategories = new Array();
     categoires.forEach(function(cat){
-        console.log(event.categories.indexOf(cat.id));
+        //console.log(event.categories.indexOf(cat.id));
         if(cat.parent != nCategories.venues[0] && event.categories.indexOf(cat.id) !== -1){
             postCategories.push(cat.name);
         }
@@ -193,6 +234,14 @@ function showEventDetails(event){
     eventDetails.innerHTML = "";
     eventDetails.appendChild(clone);
 }
+function showPageDetails(page){
+    let clone = pageDetailsTemplate.cloneNode(true);
 
+    clone.querySelector(".dTitle").textContent = page.title.rendered.toLowerCase();
+    clone.querySelector(".dContent").innerHTML = page.content.rendered;
+
+    pageDetails.innerHTML = "";
+    pageDetails.appendChild(clone);
+}
 
 getCategories();
